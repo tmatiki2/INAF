@@ -1,0 +1,85 @@
+import bpy
+import numpy as np
+import cv2
+from scipy.spatial.transform import Rotation as R
+import math
+
+
+#TODO
+#This code should be copied into the Blender Python API for texturing and updating the GBDT
+#First, select the component or region of interest in the GBDT and discritize into fine meshes
+#While still selecting the component of interest, run this code in Blender.
+
+
+roll_c_u, pitch_c_u, yaw_c_u = -(3.141592/2), 0, 3.141592/2 #r_xr, r_yr, r_zr#  
+rx = np.matrix([[1, 0, 0],[0, math.cos(roll_c_u),-math.sin(roll_c_u)], [0, math.sin(roll_c_u), math.cos(roll_c_u)]])
+ry = np.matrix([[math.cos(pitch_c_u), 0, math.sin(pitch_c_u)],[0, 1, 0],[-math.sin(pitch_c_u), 0, math.cos(pitch_c_u)]])
+rz = np.matrix([[math.cos(yaw_c_u), -math.sin(yaw_c_u), 0],[math.sin(yaw_c_u), math.cos(yaw_c_u), 0],[0, 0, 1]])
+R_c_b = np.matmul(np.matmul(rz,ry),rx)
+
+#TODO
+#set the identified calibration parameters selected by the user after ranking with INAF
+t_g_b = np.array([[19.716,5.903, 5.362]]).reshape(-1,1)
+R_g_c = np.array([[  -0.033248,     0.99645,    0.077296],
+       [   -0.22338,    0.067974,    -0.97236],
+       [   -0.97416,   -0.049596,     0.22033]])
+K = np.array([[508.3997, 0, 316.0652],[0,677.8663,254.0068],[0, 0, 1]]) 
+image = cv2.imread('./INAF/codes/img13.png') #The query image
+obj = bpy.context.active_object
+if "FaceColors" not in obj.data.color_attributes:
+    color_layer = obj.data.color_attributes.new(name="FaceColors", type='BYTE_COLOR', domain='CORNER')
+else:
+    color_layer = obj.data.color_attributes["FaceColors"]
+
+mesh = obj.data
+for poly in mesh.polygons:
+    vertices_world_coords = []
+    
+    # Loop through vertices of each face
+    for idx in poly.vertices:
+        vertex_coord = obj.matrix_world @ obj.data.vertices[idx].co  # World coordinate
+        vertices_world_coords.append(np.array([vertex_coord.x, vertex_coord.y, vertex_coord.z]))
+    
+    # Project vertices to image plane
+    pixel_intensities = []
+    for vertex in vertices_world_coords:
+        vertex_homogeneous = np.array(vertex).reshape(-1,1)  # Convert to homogeneous coordinates
+        vertex_camera = K @ R_g_c @ (vertex_homogeneous - t_g_b)  # Apply projection
+        vertex_camera = np.array(vertex_camera).flatten()
+        u, v = vertex_camera[0] / vertex_camera[2], vertex_camera[1] / vertex_camera[2]  # Normalize
+        
+        if u>0 and u<=(image.shape[1]-1) and v>0 and v<=(image.shape[0]-1):
+            u, v = int(np.clip(u, 0, image.shape[1] - 1)), int(np.clip(v, 0, image.shape[0] - 1))
+            pixel_intensities.append(image[v, u, :])
+        else:
+            pixel_intensities.append(np.zeros(3))
+    
+    # Calculate average intensity for the face
+    #avg_intensity = np.median(pixel_intensities,0) / 255.0  # Normalize to range [0, 1]
+    
+    avg_intensity = np.array(pixel_intensities[0]) / 255.0
+    # Apply the average intensity as face color (convert to RGB or RGBA)
+    color = (avg_intensity[2], avg_intensity[1], avg_intensity[0], 1.0)  # Grayscale color
+    for loop_index in poly.loop_indices:
+        color_layer.data[loop_index].color = color
+
+if not obj.data.materials:
+    mat = bpy.data.materials.new(name="VertexColorMaterial")
+    obj.data.materials.append(mat)
+else:
+    mat = obj.data.materials[0]
+        
+mat.use_nodes = True
+nodes = mat.node_tree.nodes
+links = mat.node_tree.links
+nodes.clear()
+output_node = nodes.new(type='ShaderNodeOutputMaterial')
+output_node.location = (400, 0)
+diffuse_node = nodes.new(type='ShaderNodeBsdfDiffuse')
+diffuse_node.location = (200, 0)
+links.new(diffuse_node.outputs['BSDF'], output_node.inputs['Surface'])
+attribute_node = nodes.new(type='ShaderNodeAttribute')
+attribute_node.attribute_name = "FaceColors"  # Match the vertex color layer name
+attribute_node.location = (0, 0)
+links.new(attribute_node.outputs['Color'], diffuse_node.inputs['Color'])
+    
