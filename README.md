@@ -1,7 +1,7 @@
 # **INAF**
 <img width="975" height="564" alt="image" src="https://github.com/user-attachments/assets/b3190e3b-2751-4b81-afbd-c15b00addab1" />
 
-Iterative Neural Alignment with Feedback **(INAF)** is an AI-enabled framework for precise image calibration. The identified calibration parameters can be used structural condition assessment as presented in the paper. This repository provides starter code to implement the framework's algorithm and train the alignment and feedback networks on custom dataset. If you find this repository useful, please site the paper *"AI-enabled Image calibration for Non-contact Structural Condition Assessment"*.
+Iterative Neural Alignment with Feedback **(INAF)** is an AI-enabled framework for precise image calibration. The identified calibration parameters can be used for structural condition assessment as presented in the paper. This repository provides starter code to implement the framework's algorithm and train the Alignment and Feedback networks on custom dataset. If you find this repository useful, please site the paper *"AI-enabled Image calibration for Non-contact Structural Condition Assessment"*. Contact the author at thomasngare5@gmail.com.
 
 # **Install dependencies** 
 Run the *"requirements.txt"* to install neccessary libraries, a virtual environment is recommended:
