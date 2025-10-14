@@ -54,5 +54,4 @@ pip install -r requirements.txt
 <img width="993" height="191" alt="image" src="https://github.com/user-attachments/assets/d314b61c-cd00-4603-9f41-8d0cca3e05b3" />
 **Query #2**
 <img width="1876" height="360" alt="image" src="https://github.com/user-attachments/assets/d9c8ea77-1932-4672-a207-38920e767943" />
-**Query #3**
 
