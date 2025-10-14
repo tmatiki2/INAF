@@ -22,3 +22,20 @@ pip install -r requirements.txt
 # **Run INAF to calibrate query image(s)**
 1. Run the **"runINAF.ipynb"** notebook available in the codes directory to calibrate query images. Provide the directory to the fine-tuned models.
 2. Download the **"updateGBDT.txt"** file into your **"Blender*** model hosting the GBDT to update the texture for condition assessment.
+
+# **Results for SSTL bridge**
+**Query #1**
+<img width="1622" height="325" alt="image" src="https://github.com/user-attachments/assets/f5247ea2-538b-42d2-b3cb-54b646a39c46" />
+**Query #2**
+<img width="1415" height="285" alt="image" src="https://github.com/user-attachments/assets/ae6b3136-965d-445b-b9b4-2b4d2390a53c" />
+**Query #3**
+<img width="1619" height="326" alt="image" src="https://github.com/user-attachments/assets/cfe461f7-0a16-4bf4-90d0-8fa917adbcd0" />
+**Query #4**
+<img width="1621" height="327" alt="image" src="https://github.com/user-attachments/assets/c87ddc43-3f98-410d-b55b-6575b89df2ce" />
+**Query #5**
+<img width="1622" height="325" alt="image" src="https://github.com/user-attachments/assets/3a78b571-5573-4aec-9687-a55e4f9c3a3e" />
+**Query #6**
+<img width="1620" height="325" alt="image" src="https://github.com/user-attachments/assets/eed4b65f-d463-4ca1-87f6-218b9a886846" />
+
+# **Results for UIUC Smart bridge**
+
