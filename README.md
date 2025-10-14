@@ -37,5 +37,22 @@ pip install -r requirements.txt
 **Query #6**
 <img width="1620" height="325" alt="image" src="https://github.com/user-attachments/assets/eed4b65f-d463-4ca1-87f6-218b9a886846" />
 
-# **Results for UIUC Smart bridge**
+# **Results for Kavita Lalith Bahl Smart bridge UIUC**
+**Query #1**
+<img width="1625" height="326" alt="image" src="https://github.com/user-attachments/assets/71946e3d-5ce4-4884-a40e-c94197368a1c" />
+**Query #2**
+<img width="1592" height="321" alt="image" src="https://github.com/user-attachments/assets/009e2c80-0ac9-46e7-b4e3-2c27c0831970" />
+**Query #3**
+<img width="1618" height="327" alt="image" src="https://github.com/user-attachments/assets/a0be4842-8b70-4ce2-afc7-982ba86d6f70" />
+**Query #4**
+<img width="1606" height="325" alt="image" src="https://github.com/user-attachments/assets/b1f5b7d2-bab5-4bfc-98e4-97dd7ff4d9c3" />
+**Query #5**
+<img width="1623" height="323" alt="image" src="https://github.com/user-attachments/assets/3767336d-dc11-427d-9558-4c40e86b2a6c" />
+
+# **Results for Dalles Miter Gate Oregon**
+**Query #1**
+<img width="993" height="191" alt="image" src="https://github.com/user-attachments/assets/d314b61c-cd00-4603-9f41-8d0cca3e05b3" />
+**Query #2**
+<img width="1876" height="360" alt="image" src="https://github.com/user-attachments/assets/d9c8ea77-1932-4672-a207-38920e767943" />
+**Query #3**
 
