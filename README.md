@@ -20,8 +20,9 @@ pip install -r requirements.txt
 2. Run the **"trainINAF.ipynb"** notebook to train both the alignment and feedback networks.
 
 # **Run INAF to calibrate query image(s)**
-1. Run the **"runINAF.ipynb"** notebook available in the codes directory to calibrate query images. Provide the directory to the fine-tuned models.
-2. Download the **"updateGBDT.txt"** file into your **"Blender*** model hosting the GBDT to update the texture for condition assessment.
+1. Run the **"runINAF.ipynb"** notebook available in the **codes** directory to calibrate query images. Provide the directory to the fine-tuned models.
+2. Some test images together with backgroud masks is available for Kavita Lalith Bahl Smart bridge, in the **codes** directory.
+3. Download the **"updateGBDT.txt"** file into your **"Blender*** model hosting the GBDT to update the texture for condition assessment.
 
 # **Results for SSTL bridge**
 **Query #1**
